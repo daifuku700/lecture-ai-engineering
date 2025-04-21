@@ -87,7 +87,7 @@ def extract_assistant_response(outputs, user_prompt):
     try:
         if outputs and isinstance(outputs, list) and len(outputs) > 0 and outputs[0].get("generated_text"):
             generated_output = outputs[0]["generated_text"]
-            
+
             if isinstance(generated_output, list):
                 # メッセージフォーマットの場合
                 if len(generated_output) > 0:
@@ -102,7 +102,7 @@ def extract_assistant_response(outputs, user_prompt):
             elif isinstance(generated_output, str):
                 # 文字列形式の場合
                 full_text = generated_output
-                
+
                 # 単純なプロンプト入力の場合、プロンプト後の全てを抽出
                 if user_prompt:
                     prompt_end_index = full_text.find(user_prompt)
@@ -215,7 +215,7 @@ def load_model_task():
 print("FastAPIエンドポイントを定義しました。")
 
 # --- ngrokでAPIサーバーを実行する関数 ---
-def run_with_ngrok(port=8501):
+def run_with_ngrok(port=8991):
     """ngrokでFastAPIアプリを実行"""
     nest_asyncio.apply()
 
@@ -279,6 +279,6 @@ def run_with_ngrok(port=8501):
 # --- メイン実行ブロック ---
 if __name__ == "__main__":
     # 指定されたポートでサーバーを起動
-    run_with_ngrok(port=8501)  # このポート番号を確認
+    run_with_ngrok(port=8991)  # このポート番号を確認
     # run_with_ngrokが終了したときにメッセージを表示
     print("\nサーバープロセスが終了しました。")
