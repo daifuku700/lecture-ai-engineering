@@ -154,6 +154,18 @@ async def health_check():
 
     return {"status": "ok", "model": config.MODEL_NAME}
 
+@app.post("/name", response_model=GenerationResponse)
+async def model_name():
+    """モデル名を取得するエンドポイント"""
+    global model
+    if model is None:
+        print("nameエンドポイント: モデルが読み込まれていません。読み込みを試みます...")
+        load_model_task()
+    return GenerationResponse(
+        generated_text=config.MODEL_NAME,
+        response_time=0.0  # モデル名取得は即時
+    )
+
 # 簡略化されたエンドポイント
 @app.post("/generate", response_model=GenerationResponse)
 async def generate_simple(request: SimpleGenerationRequest):
